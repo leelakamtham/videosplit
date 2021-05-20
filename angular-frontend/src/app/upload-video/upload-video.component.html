@@ -1,0 +1,18 @@
+<div class="container">
+
+    <!-- <button mat-raised-button>Choose file</button> -->
+    <input
+     mat-input
+     class="inputFileUpload"
+     [(ngModel)]="inputFileName"
+
+    type="file" 
+    (change) = "onChange($event)" >
+
+  
+
+    <!-- (change)="onChange($event)"   "-->
+
+    <button mat-raised-button  color="primary" (click)="onAddFile()">Add File</button>
+
+</div>

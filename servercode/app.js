@@ -10,7 +10,7 @@ const multipart = require('connect-multiparty');
  const multipartMiddleware = multipart({ uploadDir : './upload/'})
 //const multipartMiddleware = multipart()
 
-const PORT = 8000;
+const PORT = 3000;
 
 const app = express();
 
