@@ -56,12 +56,29 @@ app.post('/api/upload', multipartMiddleware, (req, res)=>{
    // res.json({'path': req.files.file.path});
 
    // res.json({'message':req.files});
+
+
+   
+
+
+
+   // here video is stored in upload folder we are accessing the file with path
+   // path is access by file.path  ({'path': req.files.file.path});
+
+
+
+
    
  const videofile = req.files.file.path;
 
  const file = req.files.file.name;
 
  console.log(videofile);
+
+
+
+
+
 
 // const videofile = req.files.filename.path;
 // const file = req.files.filename.name;
@@ -130,6 +147,10 @@ res.write(file,'binary');
 
 
 
+app.listen(PORT,(req,res)=>{
+    console.log(`server listening on port ${PORT}` )
+})
+
 
 
 
@@ -142,25 +163,6 @@ res.write(file,'binary');
 //const videofile = multipartMiddleware;
 //const file = req.name;
 
-/*
-
-
-ffmpeg.ffprobe(videoFile,(err,metaData)=>{
-    const {duration} = metaData.format;
-    const clipDuration = 3;
-    var arr = []
-    for(var i=1; i < duration; i +=3){
-        arr.push(i);
-    }
-    Promise.each(arr, function(a, index, length){
-    var output = "./Out/demo"+index+".mp4"
-    return split(a, clipDuration, videoFile, output).then(function(d){
-        return
-    })
-      
-    })
-}) ;
-*/
 
 
 
@@ -171,11 +173,4 @@ ffmpeg.ffprobe(videoFile,(err,metaData)=>{
 
 
 
-app.listen(PORT,(req,res)=>{
-    console.log(`server listening on port ${PORT}` )
-})
-
-
-
-
-  //, "proxyConfig": "proxy.conf.json"
+  

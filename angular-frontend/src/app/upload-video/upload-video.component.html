@@ -4,15 +4,26 @@
     <input
      mat-input
      class="inputFileUpload"
+     
      [(ngModel)]="inputFileName"
-
     type="file" 
     (change) = "onChange($event)" >
 
-  
-
-    <!-- (change)="onChange($event)"   "-->
 
     <button mat-raised-button  color="primary" (click)="onAddFile()">Add File</button>
 
-</div>
+</div><br>
+<br>
+<br>
+
+
+<div fxLayout="row" class="video-container">
+    <video width="320" height="240" controls   #videoPlayer>
+
+        <!-- <source [src]="videoSource" type="video/mp4"> -->
+         <source [src]="url" *ngIf="url"  type="video/mp4">
+<!-- 
+        <source src="{{inputFileName}}" type="video/mp4">  (canplay)="pauseVideo(videoPlayer)"-->
+       
+    </video>
+ </div> 
