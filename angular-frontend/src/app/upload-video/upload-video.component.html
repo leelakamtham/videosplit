@@ -1,3 +1,6 @@
+<head>   
+    <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
 <div class="container">
 
     <!-- <button mat-raised-button>Choose file</button> -->
@@ -15,8 +18,6 @@
 </div><br>
 <br>
 <br>
-
-
 <div fxLayout="row" class="video-container">
     <video width="320" height="240" controls   #videoPlayer>
 
@@ -26,4 +27,87 @@
         <source src="{{inputFileName}}" type="video/mp4">  (canplay)="pauseVideo(videoPlayer)"-->
        
     </video>
- </div> 
+ </div>  
+
+
+
+
+ <br>
+ <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <!-- <button mat-raised-button  color="primary"  (click)="getFiles(this.basename)">Get Split Videos</button> -->
+
+  <div class="card mt-3">
+    <div class="card-header">List of split Video Files</div>
+    <div ng-repeat="file in fileInfos">
+        <li class="list-group-item">  
+        <a href="{{this.videos}} ">{{ this.videos}}</a>
+    </li>
+    </div>
+       
+         </div>
+
+  
+
+  <!-- 
+  
+
+    
+
+<div ng-repeat="file in fileInfos">
+    <p>
+    <span>{{this.videos}}</span>
+    
+    </p>
+ </div>
+
+
+
+    <ul
+     class="list-group list-group-flush"
+      *ngFor="let file of fileInfos | async"
+    >
+      
+          
+     <a href="{{ this.videos }}"></a> 
+            <p>{{this.videos }}</p>  
+    
+        </li>
+      </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div fxLayout="row" class="video-container">
+    <video width="220" height="240" controls   #videoPlayer>
+
+        
+       
+
+  <source [src]="url" *ngIf="url"  type="video/mp4"> 
+       <source src="{{this.videos}}" type="video/mp4"     (canplay)="pauseVideo(videoPlayer)"> 
+       
+      
+   </video>
+  </div>
+
+
+
+
+
+
+
+
+<li *ngFor="let file of fileInfos">
+    <a routerLink="{{this.videos}}">
+      <span class="badge">{{this.videos}}</span> 
+    </a> -->

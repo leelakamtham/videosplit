@@ -24,6 +24,7 @@ app.use(cors());
 
 const ffmpeg = require('fluent-ffmpeg');
 const Promise = require("bluebird");
+const { basename } = require('path');
 
 
 function split(startingTime, clipDuration, input, output){
@@ -87,6 +88,8 @@ app.post('/api/upload', multipartMiddleware, (req, res)=>{
 
 console.log("=====",file, path.extname(file));
 //const extension = file.split('.');
+
+
 const exten = path.extname(file);
 const basename = path.basename(file,exten);
 
@@ -106,12 +109,20 @@ ffmpeg.ffprobe(videofile,(err,metaData)=>{
     return split(a, clipDuration, videofile, output).then(function(d){
         return
     })
+
       
     })
+
+    res.json([arr.length]);
 }) ;
 
-    res.json({'message':"video uploaded successfully"});
+   
 });
+
+
+
+
+
 
 
 app.get("/api/getfiles",(req,res)=>{
@@ -123,6 +134,36 @@ app.get("/api/getfiles",(req,res)=>{
 
     //res.send("welcome to my project");
 });
+
+
+
+/*
+app.get("/api/splitfiles/:basename",(req,res)=>{
+
+    var regex = new RegExp(req.query.filename);
+    var basename = regex;
+    const files= fs.readdir(__dirname+ '/splitedfol/'+basename ,function(err,result){
+        if(err) console.log(err);
+    });
+
+    console.log(files);
+    res.send(files);
+
+
+    //res.send("welcome to my project");
+});
+
+
+*/
+
+
+
+
+
+
+
+
+
 
 
 app.get('/api/download/:filename',(req,res)=>{
@@ -141,9 +182,80 @@ res.write(file,'binary');
 
 
 
+app.get("/api/splitfiles/:file",(req,res)=>{
+    var file = req.params.file;
+    const splitfiles = fromDir(__dirname+ '/splitedfol/', file);
+
+   
+   splitfiles.then(splitvideos => { res.json (splitvideos)}); 
+    
 
 
 
+
+    
+
+   
+    
+    
+
+   
+});
+
+
+
+
+
+function fromDir(startPath,filter){
+
+    //console.log('Starting from dir '+startPath+'/');
+
+
+ return new Promise(function(resolve,reject){
+  var splitvideos=[]
+
+    if (!fs.existsSync(startPath)){
+        console.log("no dir ",startPath);
+        
+        reject("rejected");
+    }
+
+    var files=fs.readdirSync(startPath);
+    for(var i=0;i<files.length;i++){
+        var filename=path.join(startPath,files[i]);
+        var stat = fs.lstatSync(filename);
+        const bname = path.basename(filename);
+
+
+        if (stat.isDirectory()){
+            fromDir(filename,filter); //recurse
+        }
+
+
+        else if (filename.indexOf(filter)>=0) {
+
+           splitvideos.push(bname);
+            console.log('split videos of given video : ',bname);
+        };
+    };
+
+resolve (splitvideos);
+
+
+})
+
+};
+
+
+
+
+
+
+
+
+
+
+    
 
 
 
